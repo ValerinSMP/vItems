@@ -1,0 +1,75 @@
+# ===========================================
+# MESSAGES - vItems
+# ===========================================
+# Format: MiniMessage
+#   <color:#C77DFF>text</color> - Hex color (purple theme)
+#   <gray>, <red>, <green>, etc. - Named colors
+#   %prefix% - Auto-replaced with the prefix below
+
+general:
+  prefix: '<dark_gray>[<color:#C77DFF>ᴠɪᴛᴇᴍs</color><dark_gray>] '
+  no-permission: '%prefix%<color:#C77DFF>No tienes permiso para usar este comando.'
+  player-only: '%prefix%<color:#C77DFF>Este comando solo puede ser ejecutado por jugadores.'
+  config-reloaded: '%prefix%<color:#C77DFF>¡Configuración recargada!'
+  items-updated: '%prefix%<gray>Se actualizaron <color:#C77DFF>%count% <gray>items.'
+  
+command:
+  usage: '%prefix%<gray>Uso: <color:#C77DFF>/vitems <give|reload|list>'
+  give-usage: '%prefix%<gray>Uso: <color:#C77DFF>/vitems give <jugador> <item>'
+  player-not-found: '%prefix%<red>Jugador no encontrado.'
+  invalid-item: '%prefix%<red>Item inválido. Usa <color:#C77DFF>/vitems list'
+  item-given: '%prefix%<gray>Has dado <color:#C77DFF>%item% <gray>a <color:#C77DFF>%player%<gray>.'
+  item-received: '%prefix%<gray>Has recibido <color:#C77DFF>%item%<gray>.'
+  
+  list-header: '%prefix%<gray>Items disponibles:'
+  list-item: '<gray>- <color:#C77DFF>%item% <dark_gray>→ <white>%description%'
+
+tool:
+  cooldown: '%prefix%<gray>Debes esperar <color:#C77DFF>%time%s <gray>antes de usar esta herramienta.'
+  disabled: '%prefix%<red>Esta herramienta está deshabilitada.'
+  worldguard-protection: '%prefix%<red>No puedes usar esto aquí. Zona protegida.'
+  
+# ===========================================
+# ITEM NAMES & LORE
+# ===========================================
+
+items:
+  pickaxe_3x3:
+    name: '<color:#C77DFF>⛏ Pico 3x3'
+    lore:
+      - '<gray>Rompe bloques en área <color:#C77DFF>3x3'
+      - '<gray>Material: <color:#C77DFF>Netherite'
+      - '<dark_gray>• Sin cooldown'
+      - ''
+      - '<color:#9D4EDD>Herramienta ValerinSMP'
+      
+  shovel_3x3:
+    name: '<color:#C77DFF>⛏ Pala 3x3'
+    lore:
+      - '<gray>Excava bloques en área <color:#C77DFF>3x3'
+      - '<gray>Material: <color:#C77DFF>Netherite'
+      - '<dark_gray>• Sin cooldown'
+      - ''
+      - '<color:#9D4EDD>Herramienta ValerinSMP'
+      
+  veinminer:
+    name: '<color:#C77DFF>⛏ Pico Veinminer'
+    lore:
+      - '<gray>Mina <color:#C77DFF>venas completas <gray>de mineral'
+      - '<gray>Máximo: <color:#C77DFF>25 bloques'
+      - '<gray>Material: <color:#C77DFF>Netherite'
+      - '<dark_gray>• Cooldown: <color:#C77DFF>5s'
+      - '<dark_gray>• Compatible con <color:#C77DFF>Fortuna'
+      - ''
+      - '<color:#9D4EDD>Herramienta ValerinSMP'
+      
+  tree_capitator:
+    name: '<color:#C77DFF>🪓 Hacha Tree Capitator'
+    lore:
+      - '<gray>Tala <color:#C77DFF>árboles completos'
+      - '<gray>Máximo: <color:#C77DFF>25 bloques'
+      - '<gray>Material: <color:#C77DFF>Netherite'
+      - '<dark_gray>• Cooldown: <color:#C77DFF>5s'
+      - '<dark_gray>• Animación progresiva'
+      - ''
+      - '<color:#9D4EDD>Herramienta ValerinSMP'

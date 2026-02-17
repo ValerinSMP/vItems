@@ -1,0 +1,12 @@
+name: vItems
+version: "${project.version}"
+main: com.vallerinsmp.vitems.VItems
+author: mtynnn
+api-version: "1.21"
+softdepend: [WorldGuard]
+
+commands:
+  vitems:
+    description: vItems main command
+    usage: /<command> [give|reload|list]
+    aliases: [vi, vitem]

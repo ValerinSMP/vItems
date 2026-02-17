@@ -1,0 +1,49 @@
+# ===========================================
+# vItems Configuration
+# ===========================================
+# Author: mtynnn
+# Organization: ValerinSMP
+
+settings:
+  # Actualizar items existentes al hacer reload
+  update-items-on-reload: true
+  # Cantidad de items a actualizar por tick (evita lag)
+  update-batch-size: 50
+  # Debug mode
+  debug: false
+
+# ===========================================
+# TOOL CONFIGURATIONS
+# ===========================================
+
+tools:
+  # Pico 3x3 - Rompe bloques en área 3x3 instantáneamente
+  pickaxe_3x3:
+    enabled: true
+    max-blocks: 9
+    has-cooldown: false
+    cooldown-seconds: 0.0
+    
+  # Pala 3x3 - Excava bloques en área 3x3 instantáneamente
+  shovel_3x3:
+    enabled: true
+    max-blocks: 9
+    has-cooldown: false
+    cooldown-seconds: 0.0
+    
+  # Veinminer - Mina venas de mineral conectadas progresivamente
+  veinminer:
+    enabled: true
+    max-blocks: 25
+    has-cooldown: true
+    cooldown-seconds: 5.0
+    only-same-ore: true
+    animation-delay-ticks: 2
+    
+  # Tree Capitator - Tala árboles completos progresivamente
+  tree_capitator:
+    enabled: true
+    max-blocks: 25
+    has-cooldown: true
+    cooldown-seconds: 5.0
+    animation-delay-ticks: 2
