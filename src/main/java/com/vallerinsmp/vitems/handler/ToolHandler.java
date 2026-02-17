@@ -109,6 +109,12 @@ public abstract class ToolHandler {
     /**
      * Handle block break event
      * Must be implemented by each tool
+     * 
+     * @param player      The player breaking the block
+     * @param block       The block being broken
+     * @param item        The tool item
+     * @param clickedFace The face of the block that was clicked (null if unknown)
      */
-    public abstract void handleBlockBreak(Player player, Block block, ItemStack item);
+    public abstract void handleBlockBreak(Player player, Block block, ItemStack item,
+            org.bukkit.block.BlockFace clickedFace);
 }

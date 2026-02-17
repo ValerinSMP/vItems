@@ -27,8 +27,9 @@ public class TreeCapitatorHandler extends ToolHandler {
     }
 
     @Override
-    public void handleBlockBreak(Player player, Block centerBlock, ItemStack item) {
-        if (!canUse(player, centerBlock)) {
+    public void handleBlockBreak(Player player, Block startBlock, ItemStack item,
+            org.bukkit.block.BlockFace clickedFace) {
+        if (!canUse(player, startBlock)) {
             return;
         }
 
@@ -38,16 +39,16 @@ public class TreeCapitatorHandler extends ToolHandler {
         }
 
         // Only work on logs
-        if (!isLog(centerBlock.getType())) {
+        if (!isLog(startBlock.getType())) {
             return;
         }
 
-        Material logType = centerBlock.getType();
+        Material logMaterial = startBlock.getType();
 
         // Find all connected logs
-        List<Block> tree = findTree(centerBlock, logType, getMaxBlocks());
+        List<Block> treeBlocks = findTree(startBlock, logMaterial, getMaxBlocks());
 
-        if (tree.isEmpty()) {
+        if (treeBlocks.isEmpty()) {
             return;
         }
 
@@ -66,13 +67,13 @@ public class TreeCapitatorHandler extends ToolHandler {
 
             @Override
             public void run() {
-                if (index >= tree.size()) {
+                if (index >= treeBlocks.size()) {
                     activeCapitators.remove(player.getUniqueId());
                     this.cancel();
                     return;
                 }
 
-                Block block = tree.get(index);
+                Block block = treeBlocks.get(index);
 
                 // Check WorldGuard before breaking
                 if (!WorldGuardHook.canBreak(player, block)) {

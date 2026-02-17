@@ -3,8 +3,10 @@ com\vallerinsmp\vitems\listener\BlockBreakListener.class
 com\vallerinsmp\vitems\manager\ItemUpdateManager$1.class
 com\vallerinsmp\vitems\handler\VeinminerHandler$1.class
 com\vallerinsmp\vitems\manager\ItemUpdateManager.class
+com\vallerinsmp\vitems\handler\Shovel3x3Handler$1.class
 com\vallerinsmp\vitems\manager\ConfigManager.class
 com\vallerinsmp\vitems\handler\Pickaxe3x3Handler.class
+com\vallerinsmp\vitems\handler\Pickaxe3x3Handler$1.class
 com\vallerinsmp\vitems\handler\ToolHandler.class
 com\vallerinsmp\vitems\handler\VeinminerHandler.class
 com\vallerinsmp\vitems\manager\ItemManager$1.class

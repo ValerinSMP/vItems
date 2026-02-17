@@ -44,12 +44,19 @@ public class BlockBreakListener implements Listener {
         // Cancel the original event to handle it ourselves
         event.setCancelled(true);
 
+        // Get the block face that was clicked using raytracing
+        org.bukkit.block.BlockFace clickedFace = null;
+        var rayTraceResult = player.rayTraceBlocks(5.0);
+        if (rayTraceResult != null && rayTraceResult.getHitBlockFace() != null) {
+            clickedFace = rayTraceResult.getHitBlockFace();
+        }
+
         // Delegate to appropriate handler
         switch (itemType) {
-            case PICKAXE_3X3 -> pickaxe3x3Handler.handleBlockBreak(player, event.getBlock(), item);
-            case SHOVEL_3X3 -> shovel3x3Handler.handleBlockBreak(player, event.getBlock(), item);
-            case VEINMINER -> veinminerHandler.handleBlockBreak(player, event.getBlock(), item);
-            case TREE_CAPITATOR -> treeCapitatorHandler.handleBlockBreak(player, event.getBlock(), item);
+            case PICKAXE_3X3 -> pickaxe3x3Handler.handleBlockBreak(player, event.getBlock(), item, clickedFace);
+            case SHOVEL_3X3 -> shovel3x3Handler.handleBlockBreak(player, event.getBlock(), item, clickedFace);
+            case VEINMINER -> veinminerHandler.handleBlockBreak(player, event.getBlock(), item, clickedFace);
+            case TREE_CAPITATOR -> treeCapitatorHandler.handleBlockBreak(player, event.getBlock(), item, clickedFace);
         }
     }
 

@@ -42,14 +42,18 @@ public class ItemManager {
         // Set NBT identifier
         meta.getPersistentDataContainer().set(itemTypeKey, PersistentDataType.STRING, type.getNbtIdentifier());
 
-        // Set display name
+        // Set display name (with italic reset)
         String namePath = "items." + type.getConfigKey() + ".name";
-        Component name = plugin.getConfigManager().getMessage(namePath);
+        String nameText = plugin.getConfigManager().getRawMessage(namePath);
+        Component name = plugin.getConfigManager().parse("<!italic>" + nameText);
         meta.displayName(name);
 
-        // Set lore
+        // Set lore (with italic reset)
         String lorePath = "items." + type.getConfigKey() + ".lore";
-        List<Component> lore = plugin.getConfigManager().getComponentList(lorePath);
+        List<String> loreLines = plugin.getConfigManager().getMessageList(lorePath);
+        List<Component> lore = loreLines.stream()
+                .map(line -> plugin.getConfigManager().parse("<!italic>" + line))
+                .toList();
         meta.lore(lore);
 
         // Add glow effect
@@ -98,14 +102,18 @@ public class ItemManager {
             return;
         }
 
-        // Update display name
+        // Update display name (with italic reset)
         String namePath = "items." + type.getConfigKey() + ".name";
-        Component name = plugin.getConfigManager().getMessage(namePath);
+        String nameText = plugin.getConfigManager().getRawMessage(namePath);
+        Component name = plugin.getConfigManager().parse("<!italic>" + nameText);
         meta.displayName(name);
 
-        // Update lore
+        // Update lore (with italic reset)
         String lorePath = "items." + type.getConfigKey() + ".lore";
-        List<Component> lore = plugin.getConfigManager().getComponentList(lorePath);
+        List<String> loreLines = plugin.getConfigManager().getMessageList(lorePath);
+        List<Component> lore = loreLines.stream()
+                .map(line -> plugin.getConfigManager().parse("<!italic>" + line))
+                .toList();
         meta.lore(lore);
 
         item.setItemMeta(meta);

@@ -26,8 +26,9 @@ public class VeinminerHandler extends ToolHandler {
     }
 
     @Override
-    public void handleBlockBreak(Player player, Block centerBlock, ItemStack item) {
-        if (!canUse(player, centerBlock)) {
+    public void handleBlockBreak(Player player, Block startBlock, ItemStack item,
+            org.bukkit.block.BlockFace clickedFace) {
+        if (!canUse(player, startBlock)) {
             return;
         }
 
@@ -36,7 +37,7 @@ public class VeinminerHandler extends ToolHandler {
             return;
         }
 
-        Material oreType = centerBlock.getType();
+        Material oreType = startBlock.getType();
 
         // Only work on ores
         if (!isOre(oreType)) {
@@ -44,7 +45,7 @@ public class VeinminerHandler extends ToolHandler {
         }
 
         // Find all connected ore blocks
-        List<Block> vein = findVein(centerBlock, oreType, getMaxBlocks());
+        List<Block> vein = findVein(startBlock, oreType, getMaxBlocks());
 
         if (vein.isEmpty()) {
             return;

@@ -24,13 +24,14 @@ public class Shovel3x3Handler extends ToolHandler {
     }
 
     @Override
-    public void handleBlockBreak(Player player, Block centerBlock, ItemStack item) {
+    public void handleBlockBreak(Player player, Block centerBlock, ItemStack item,
+            org.bukkit.block.BlockFace clickedFace) {
         if (!canUse(player, centerBlock)) {
             return;
         }
 
-        // Get blocks to break in 3x3 area
-        List<Block> blocksToBreak = get3x3Area(player, centerBlock);
+        // Get blocks to break in 3x3 area based on clicked face
+        List<Block> blocksToBreak = get3x3Area(centerBlock, clickedFace);
 
         int blocksBroken = 0;
         boolean isCreative = player.getGameMode() == GameMode.CREATIVE;
@@ -66,49 +67,48 @@ public class Shovel3x3Handler extends ToolHandler {
     }
 
     /**
-     * Get 3x3 area of blocks based on player's facing direction
-     * Same as pickaxe
+     * Get 3x3 area of blocks based on the face that was clicked
+     * The 3x3 area is perpendicular to the clicked face
      */
-    private List<Block> get3x3Area(Player player, Block center) {
+    private List<Block> get3x3Area(Block center, org.bukkit.block.BlockFace clickedFace) {
         List<Block> blocks = new ArrayList<>();
 
-        float yaw = player.getLocation().getYaw();
-        float pitch = player.getLocation().getPitch();
+        // If face is null, default to a vertical 3x3 (north/south oriented)
+        if (clickedFace == null) {
+            clickedFace = org.bukkit.block.BlockFace.NORTH;
+        }
 
-        // Determine if looking up/down (vertical breaking)
-        if (Math.abs(pitch) > 60) {
-            // Horizontal 3x3 (looking up or down)
-            for (int x = -1; x <= 1; x++) {
-                for (int z = -1; z <= 1; z++) {
-                    blocks.add(center.getRelative(x, 0, z));
+        // Determine the 3x3 plane based on which face was clicked
+        switch (clickedFace) {
+            case UP, DOWN -> {
+                // Clicked top or bottom -> dig horizontal 3x3
+                for (int x = -1; x <= 1; x++) {
+                    for (int z = -1; z <= 1; z++) {
+                        blocks.add(center.getRelative(x, 0, z));
+                    }
                 }
             }
-        } else {
-            // Vertical 3x3 based on facing direction
-            float normalizedYaw = (yaw + 360) % 360;
-
-            if (normalizedYaw >= 315 || normalizedYaw < 45) {
+            case NORTH, SOUTH -> {
+                // Clicked north/south face -> dig vertical 3x3 on X-Y plane
                 for (int x = -1; x <= 1; x++) {
                     for (int y = -1; y <= 1; y++) {
                         blocks.add(center.getRelative(x, y, 0));
                     }
                 }
-            } else if (normalizedYaw >= 45 && normalizedYaw < 135) {
+            }
+            case EAST, WEST -> {
+                // Clicked east/west face -> dig vertical 3x3 on Z-Y plane
                 for (int z = -1; z <= 1; z++) {
                     for (int y = -1; y <= 1; y++) {
                         blocks.add(center.getRelative(0, y, z));
                     }
                 }
-            } else if (normalizedYaw >= 135 && normalizedYaw < 225) {
+            }
+            default -> {
+                // For diagonal faces, default to horizontal
                 for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        blocks.add(center.getRelative(x, y, 0));
-                    }
-                }
-            } else {
-                for (int z = -1; z <= 1; z++) {
-                    for (int y = -1; y <= 1; y++) {
-                        blocks.add(center.getRelative(0, y, z));
+                    for (int z = -1; z <= 1; z++) {
+                        blocks.add(center.getRelative(x, 0, z));
                     }
                 }
             }
